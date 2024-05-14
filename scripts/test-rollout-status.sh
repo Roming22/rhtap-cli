@@ -12,8 +12,8 @@ declare -r NAMESPACE="${NAMESPACE:-}"
 declare -r RESOURCE_TYPE="${RESOURCE_TYPE:-statefulset}"
 
 # The "rollout status" selectors, to find the actual resource to check for
-# successul rollout.
-declare -r -a RESOURCE_SELECTORS=("${@}")
+# successul rollout. An empty selector will check the status of all resources.
+declare -r -a RESOURCE_SELECTORS=("${@:-}")
 
 rollout_status() {
     oc rollout status "${RESOURCE_TYPE}" \
@@ -30,7 +30,7 @@ wait_for_resource() {
             echo -en "#\n# WARNING: ${RESOURCE_TYPE} '${s}' is not ready!\n#\n"
             return 1
         fi
-        echo "# ${RESOURCE_TYPE} objects with '${s}' selector are ready!"
+        echo "# ${RESOURCE_TYPE} objects with '${s:-null}' selector are ready!"
     done
     return 0
 }
@@ -48,7 +48,7 @@ EOF
 test_rollout_status() {
     [[ -z "${NAMESPACE}" ]] && usage
     [[ -z "${RESOURCE_TYPE}" ]] && usage
-    [[ ${#RESOURCE_SELECTORS[@]} -eq 0 ]] && usage
+    [[ "${RESOURCE_SELECTORS[@]}" = "" ]] && echo "# No selector in input, checking all ${RESOURCE_TYPE} objects."
 
     for i in {1..5}; do
         wait_for_resource &&
@@ -64,7 +64,7 @@ test_rollout_status() {
 }
 
 if test_rollout_status; then
-    echo "# ${RESOURCE_TYPE} objects ready: '${RESOURCE_SELECTORS[*]}'"
+    echo "# ${RESOURCE_TYPE} objects ready: '${RESOURCE_SELECTORS[*]:-null}'"
     exit 0
 else
     echo "# ERROR: ${RESOURCE_TYPE} not ready!"
