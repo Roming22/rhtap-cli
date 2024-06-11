@@ -19,6 +19,49 @@ var ErrEmptyConfig = errors.New("empty configuration")
 // ErrUnmarshalConfig indicates the configuration file structure is invalid.
 var ErrUnmarshalConfig = errors.New("failed to unmarshal configuration")
 
+// FeatureSpec contains the configuration for a specific feature.
+type FeatureSpec struct {
+	// Enabled feature toggle.
+	Enabled bool `yaml:"enabled"`
+	// Namespace target namespace for the feature, which may involve different
+	// Helm charts targeting the specific feature namespace, while the chart
+	// target is deployed in a different namespace.
+	Namespace string `yaml:"namespace"`
+}
+
+// Features contains the configuration for the installer features.
+type Features struct {
+	// CRC Code Ready Containers (CRC).
+	CRC FeatureSpec `yaml:"crc"`
+	// Keycloak Keycloak IAM/SSO.
+	Keycloak FeatureSpec `yaml:"keycloak"`
+	// TrustedProfileAnalyzer Trusted Profile Analyzer (TPA).
+	TrustedProfileAnalyzer FeatureSpec `yaml:"trustedProfileAnalyzer"`
+	// TrustedArtifactSigner Trusted Artifact Signer (TAS).
+	TrustedArtifactSigner FeatureSpec `yaml:"trustedArtifactSigner"`
+	// RedHatAdvancedClusterSecurity Red Hat Advanced Cluster Security (RHACS).
+	RedHatAdvancedClusterSecurity FeatureSpec `yaml:"redHatAdvancedClusterSecurity"`
+	// RedHatDeveloperHub Red Hat Developer Hub (RHDH).
+	RedHatDeveloperHub FeatureSpec `yaml:"redHatDeveloperHub"`
+	// RedHatQuay Red Hat Quay (RHDH).
+	RedHatQuay FeatureSpec `yaml:"redHatQuay"`
+	// OpenShiftPipelines OpenShift Pipelines.
+	OpenShiftPipelines FeatureSpec `yaml:"openShiftPipelines"`
+}
+
+// Dependency contains a individual Helm chart configuration.
+type Dependency struct {
+	// Chart relative location to the Helm chart directory.
+	Chart string `yaml:"chart"`
+	// Namespace where the Helm chart will be deployed.
+	Namespace string `yaml:"namespace"`
+}
+
+// LoggerWith returns a logger with Dependency contextual information.
+func (d *Dependency) LoggerWith(l *slog.Logger) *slog.Logger {
+	return l.With("dep-chart", d.Chart, "dep-namespace", d.Namespace)
+}
+
 // Spec contains all configuration sections.
 type Spec struct {
 	// Namespace installer's namespace, where the installer's resources will be

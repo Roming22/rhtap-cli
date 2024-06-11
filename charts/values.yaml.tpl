@@ -35,6 +35,9 @@ openshift:
 {{- if $tpa.Enabled }}
     - {{ $tpa.Namespace }}
 {{- end }}
+{{- if $rhacs.Enabled }}
+    - {{ $rhacs.Namespace }}
+{{- end }}
 {{- if $rhdh.Enabled }}
     - {{ $rhdh.Namespace }}
 {{- end }}

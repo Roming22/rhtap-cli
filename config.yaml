@@ -13,6 +13,9 @@ rhtapCLI:
     trustedArtifactSigner:
       enabled: &tasEnabled true
       namespace: &trustedArtifactSignerNamespace rhtap-tas
+    redHatAdvancedClusterSecurity:
+      enabled: true
+      namespace: rhacs-operator
     redHatDeveloperHub:
       enabled: &rhdhEnabled true
       namespace: *installerNamespace
