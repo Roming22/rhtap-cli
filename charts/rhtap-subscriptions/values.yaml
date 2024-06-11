@@ -70,6 +70,15 @@ subscriptions:
     channel: stable
     source: redhat-operators
     sourceNamespace: openshift-marketplace
+  redHatAdvancedClusterSecurity:
+    enabled: false
+    description: Red Hat Advanced Cluster Security Operator
+    apiResource: centrals.platform.stackrox.io
+    namespace: openshift-operators
+    name: rhacs-operator
+    channel: rhacs-4.4
+    source: redhat-operators
+    sourceNamespace: openshift-marketplace
   redHatDeveloperHub:
     enabled: false
     description: Red Hat Developer Hub Operator

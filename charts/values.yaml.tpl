@@ -53,6 +53,8 @@ subscriptions:
     enabled: {{ $rhdh.Enabled }}
   openshiftTrustedArtifactSigner:
     enabled: {{ $tas.Enabled }}
+  redHatAdvancedClusterSecurity:
+    enabled: {{ $rhdh.Enabled }}
   redHatDeveloperHub:
     enabled: {{ $rhdh.Enabled }}
 
