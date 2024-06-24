@@ -33,6 +33,9 @@ openshift:
     - minio-operator
     - {{ $tpa.Namespace }}
 {{- end }}
+{{- if $acs.Enabled }}
+    - {{ $acs.Namespace }}
+{{- end }}
 {{- if $rhdh.Enabled }}
     - {{ $rhdh.Namespace }}
 {{- end }}
@@ -120,6 +123,9 @@ infrastructure:
 {{- $keycloakRouteHost := printf "sso.%s" $ingressDomain }}
 
 backingServices:
+  acs:
+    enabled: {{ $acs.Enabled }}
+    namespace: rhtap-acs
   keycloak:
     enabled: {{ $keycloak.Enabled }}
     namespace: {{ $keycloak.Namespace }}
@@ -142,12 +148,12 @@ backingServices:
       annotations:
         service.beta.openshift.io/serving-cert-secret-name: {{ $keycloakRouteTLSSecretName }}
 
-integrations:
+# integrations:
 #   acs:
 #     endpoint: ""
 #     token: ""
-  developerHub:
-    catalogUrl: https://github.com/redhat-appstudio/tssc-sample-templates/blob/release/all.yaml
+#   developerHub:
+#     catalogUrl: https://github.com/redhat-appstudio/tssc-sample-templates/blob/release/all.yaml
 #   github:
 #     clientId: ""
 #     clientSecret: ""
@@ -169,7 +175,6 @@ integrations:
 # rhtap-dh
 #
 developerHub:
-  catalogUrl: https://github.com/redhat-appstudio/tssc-sample-templates/blob/release/all.yaml
   ingressDomain: "{{ $ingressDomain }}"
 
 #
