@@ -1,0 +1,8 @@
+{{- if .Values.backingServices.acs.enabled }}
+{{- $config := .Values.backingServices.acs -}}
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ $config.namespace }}
+{{- end }}

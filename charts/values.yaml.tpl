@@ -35,6 +35,9 @@ openshift:
 {{- if $tpa.Enabled }}
     - {{ $tpa.Namespace }}
 {{- end }}
+{{- if $acs.Enabled }}
+    - {{ $acs.Namespace }}
+{{- end }}
 {{- if $rhdh.Enabled }}
     - {{ $rhdh.Namespace }}
 {{- end }}
@@ -140,6 +143,9 @@ infrastructure:
 
 
 backingServices:
+  acs:
+    enabled: {{ $acs.Enabled }}
+    namespace: rhtap-acs
   keycloak:
     enabled: {{ $keycloak.Enabled }}
     namespace: {{ $keycloak.Namespace }}
