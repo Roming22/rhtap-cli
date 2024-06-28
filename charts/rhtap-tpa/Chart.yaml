@@ -6,6 +6,6 @@ type: application
 version: 0.0.1
 
 dependencies:
-  - name: trustification
-    version: 0.2.0
+  - name: redhat-trusted-profile-analyzer
+    version: 0.0.4
     condition: trustedProfileAnalyzer.enabled
