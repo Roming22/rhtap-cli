@@ -7,6 +7,8 @@ import (
 const (
 	// CRC Code Ready Containers (CRC).
 	CRC = "crc"
+	// Integrations with external services
+	Integrations = "integrations"
 	// Keycloak Keycloak IAM/SSO.
 	Keycloak = "keycloak"
 	// TrustedProfileAnalyzer Trusted Profile Analyzer (TPA).

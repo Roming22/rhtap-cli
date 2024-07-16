@@ -4,6 +4,7 @@
 {{- $keycloak := required "Keycloak settings" .Installer.Features.keycloak -}}
 {{- $acs := required "Red Hat ACS settings" .Installer.Features.redHatAdvancedClusterSecurity -}}
 {{- $gitops := required "GitOps settings" .Installer.Features.openShiftGitOps -}}
+{{- $integrations := .Installer.Features.integrations -}}
 {{- $pipelines := required "Pipelines settings" .Installer.Features.openShiftPipelines -}}
 {{- $quay := required "Quay settings" .Installer.Features.redHatQuay -}}
 {{- $rhdh := required "RHDH settings" .Installer.Features.redHatDeveloperHub -}}
@@ -183,30 +184,14 @@ backingServices:
     replicas:
       quay: 1
       clair: 1
+
+{{- if $integrations }}
 #
 # rhtap-integrations
 #
-
-# integrations:
-#   acs:
-#     endpoint: ""
-#     token: ""
-#   github:
-#     clientId: ""
-#     clientSecret: ""
-#     id: ""
-#     publicKey: |
-#       -----BEGIN RSA PRIVATE KEY-----   # notsecret
-#       -----END RSA PRIVATE KEY-----     # notsecret
-#     token: ""
-#     webhookSecret: ""
-#   gitlab:
-#     token: ""
-#   quay:
-#     dockerconfigjson: |
-#       {
-#       }
-#     token: ""
+integrations: 
+{{ $integrations.Properties | toYaml | indent 2 }}
+{{- end }}
 
 #
 # rhtap-dh

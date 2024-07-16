@@ -1,2 +1,6 @@
 ---
-integrations: {}
+integrations:
+  acs: null
+  github: null
+  gitlab: null
+  quay: null

@@ -31,6 +31,29 @@ rhtapCLI:
       enabled: *rhdhEnabled
       # No new resources will be created in the namespace
       namespace: openshift-pipelines
+    integrations:
+      enabled: true
+      namespace: *installerNamespace
+      properties:
+        acs:
+          endpoint: ""
+          token: ""
+        github:
+          clientId: ""
+          clientSecret: ""
+          id: ""
+          publicKey: |
+            -----BEGIN RSA PRIVATE KEY-----   # notsecret
+            -----END RSA PRIVATE KEY-----     # notsecret
+          token: ""
+          webhookSecret: ""
+        gitlab:
+          token: ""
+        quay:
+          dockerconfigjson: |
+            {
+            }
+          token: ""
   dependencies:
     - chart: charts/rhtap-openshift
       namespace: *installerNamespace
