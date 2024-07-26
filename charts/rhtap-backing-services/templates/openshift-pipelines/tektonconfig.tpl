@@ -33,8 +33,8 @@ spec:
     options:
       disabled: false
   params:
-    - name: createRbacResource
-      value: 'true'
+  - name: createRbacResource
+    value: 'true'
   pipeline:
     await-sidecar-readiness: true
     coschedule: workspaces
@@ -81,20 +81,20 @@ spec:
           disabled: false
         settings:
           application-name: RHTAP CI
-          auto-configure-new-github-repo: "false"
-          bitbucket-cloud-check-source-ip: "true"
-          custom-console-name: ""
-          custom-console-url: ""
-          custom-console-url-pr-details: ""
-          custom-console-url-pr-tasklog: ""
-          error-detection-from-container-logs: "true"
-          error-detection-max-number-of-lines: "50"
+          auto-configure-new-github-repo: 'false'
+          bitbucket-cloud-check-source-ip: 'true'
+          custom-console-name: ''
+          custom-console-url: ''
+          custom-console-url-pr-details: ''
+          custom-console-url-pr-tasklog: ''
+          error-detection-from-container-logs: 'true'
+          error-detection-max-number-of-lines: '50'
           error-detection-simple-regexp: '^(?P<filename>[^:]*):(?P<line>[0-9]+):(?P<column>[0-9]+)?([ ]*)?(?P<error>.*)'
-          error-log-snippet: "true"
-          remember-ok-to-test: "false"
-          remote-tasks: "true"
-          secret-auto-create: "true"
-          secret-github-app-token-scoped: "true"
+          error-log-snippet: 'true'
+          remember-ok-to-test: 'false'
+          remote-tasks: 'true'
+          secret-auto-create: 'true'
+          secret-github-app-token-scoped: 'true'
       scc:
         default: pipelines-scc
   profile: all

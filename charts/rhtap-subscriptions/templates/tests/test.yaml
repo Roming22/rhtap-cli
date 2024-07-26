@@ -32,13 +32,30 @@ spec:
       securityContext:
         allowPrivilegeEscalation: false
   containers:
-    - name: {{ $name }}
+    - name: check-crds
       image: quay.io/codeready-toolchain/oc-client-base:latest
       command:
         - /scripts/test-subscriptions.sh
       args:
 {{- range $sub := include "subscriptions.enabled" . | fromYaml }}
         - {{ $sub.apiResource | quote }}
+{{- end }}
+      volumeMounts:
+        - name: scripts
+          mountPath: /scripts
+      securityContext:
+        allowPrivilegeEscalation: false
+    - name: check-resources
+      image: quay.io/codeready-toolchain/oc-client-base:latest
+      command:
+        - /scripts/test-resources.sh
+      args:
+{{- range $sub := include "subscriptions.enabled" . | fromYaml }}
+  {{- if $sub.resource }}
+        - {{ $sub.resource.type | quote }}
+        - {{ $sub.resource.namespace | quote }}
+        - {{ $sub.resource.name | quote }}
+  {{- end }}
 {{- end }}
       volumeMounts:
         - name: scripts

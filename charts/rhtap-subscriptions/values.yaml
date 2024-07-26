@@ -56,6 +56,10 @@ subscriptions:
     enabled: false
     description: OpenShift Pipelines Operator
     apiResource: pipelines.tekton.dev
+    resource:
+      type: tektonconfigs.operator.tekton.dev
+      namespace: ''
+      name: config
     namespace: openshift-operators
     name: openshift-pipelines-operator-rh
     channel: pipelines-1.14
