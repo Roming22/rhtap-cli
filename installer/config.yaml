@@ -59,15 +59,15 @@ rhtapCLI:
     - chart: charts/rhtap-pipelines
       namespace: *installerNamespace
       enabled: *rhdhEnabled
-    - chart: charts/rhtap-quay
-      namespace: *quayNamespace
-      enabled: *quayEnabled
-    - chart: charts/rhtap-tas
-      namespace: *trustedArtifactSignerNamespace
-      enabled: *tasEnabled
-    - chart: charts/rhtap-tpa
-      namespace: *trustedProfileAnalyzerNamespace
-      enabled: *tpaEnabled
-    - chart: charts/rhtap-dh
-      namespace: *installerNamespace
-      enabled: *rhdhEnabled
+    # - chart: charts/rhtap-quay
+    #   namespace: *quayNamespace
+    #   enabled: *quayEnabled
+    # - chart: charts/rhtap-tas
+    #   namespace: *trustedArtifactSignerNamespace
+    #   enabled: *tasEnabled
+    # - chart: charts/rhtap-tpa
+    #   namespace: *trustedProfileAnalyzerNamespace
+    #   enabled: *tpaEnabled
+    # - chart: charts/rhtap-dh
+    #   namespace: *installerNamespace
+    #   enabled: *rhdhEnabled

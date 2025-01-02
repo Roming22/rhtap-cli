@@ -22,6 +22,17 @@ spec:
     artifacts.taskrun.format: in-toto
     artifacts.taskrun.storage: oci
     disabled: false
+    # 0
+  {{- $secretObj := (lookup "v1" "Secret" "openshift-pipelines" "signing-secrets") }}
+  {{- $signingSecret := (not $secretObj) }}
+  {{- if $secretObj }}
+    # 1
+    {{- if (get ($secretObj.metadata) "labels" | default dict) }}
+    # 2
+      {{- $signingSecret = eq (get $secretObj.metadata.labels "operator.tekton.dev/operand-name" | default "") "tektoncd-operator" }}
+    {{- end }}
+  {{- end }}
+    generateSigningSecret: {{ $signingSecret }}
     transparency.enabled: 'true'
     transparency.url: http://rekor-server.rhtap-tas.svc
   config: {}
