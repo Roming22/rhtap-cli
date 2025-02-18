@@ -22,7 +22,7 @@ spec:
     #
     # Test the SCM tokens.
     #
-  {{- range list "github" "gitlab" }}
+  {{- range list "bitbucket" "github" "gitlab" }}
     {{- $scm := . }}
     {{- $scmSecretName := (printf "rhtap-%s-integration" $scm) }}
     {{- $scmSecretObj := (lookup "v1" "Secret" $namespace $scmSecretName) }}

@@ -99,6 +99,14 @@ info() {
     echo "# [INFO] ${*}"
 }
 
+bitbucket() {
+    URL="https://api.$HOST/2.0/user"
+    curl "${CURL_OPTS[@]}" \
+        --header 'Authorization: Bearer $TOKEN' \
+        --header 'Accept: application/json' \
+        "$URL"
+}
+
 github() {
     URL="https://api.$HOST/emojis"
     curl "${CURL_OPTS[@]}" \
