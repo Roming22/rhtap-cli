@@ -108,6 +108,13 @@ github() {
         "$URL"
 }
 
+gitlab() {
+    URL="https://$HOST/api/v4/version"
+    curl "${CURL_OPTS[@]}" \
+        --header "Authorization: Bearer $TOKEN" \
+        "$URL"
+}
+
 #
 # Main
 #

@@ -1,4 +1,5 @@
 ---
+{{- $namespace := .Release.Namespace -}}
 apiVersion: v1
 kind: Pod
 metadata:
@@ -21,9 +22,10 @@ spec:
     #
     # Test the SCM tokens.
     #
-    {{- $scm := "github" }}
+  {{- range list "github" "gitlab" }}
+    {{- $scm := . }}
     {{- $scmSecretName := (printf "rhtap-%s-integration" $scm) }}
-    {{- $scmSecretObj := (lookup "v1" "Secret" .Release.Namespace $scmSecretName) }}
+    {{- $scmSecretObj := (lookup "v1" "Secret" $namespace $scmSecretName) }}
     {{- if $scmSecretObj }}
     - name: test-{{ $scm }}-token
       image: registry.redhat.io/openshift4/ose-tools-rhel9
@@ -48,6 +50,7 @@ spec:
       securityContext:
         allowPrivilegeEscalation: false
     {{- end }}
+  {{- end }}
     #
     # Make sure there's at least one container
     #
