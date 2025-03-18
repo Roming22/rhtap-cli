@@ -1,6 +1,7 @@
 {{- define "pipelines.TektonConfigPatch" -}}
 spec:
   chain:
+    generateSigningSecret: true
     transparency.enabled: 'true'
     transparency.url: http://rekor-server.rhtap-tas.svc
   platforms:
