@@ -1,4 +1,4 @@
-{{- define "pipelines.tektonconfig" -}}
+{{- if .Values.infrastructure.openShiftPipelines.enabled }}
 ---
 apiVersion: operator.tekton.dev/v1alpha1
 kind: TektonConfig
@@ -110,4 +110,4 @@ spec:
     enable-api-fields: stable
     options:
       disabled: false
-{{- end -}}
+{{- end }}
