@@ -10,4 +10,5 @@
 /bin
 /hack/config/
 /installer/*.tar
+/rhtap-cli
 /tmp

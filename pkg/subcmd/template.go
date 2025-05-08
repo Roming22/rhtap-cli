@@ -52,13 +52,13 @@ to the local Helm Chart.
 Examples:
 
   # Only showing the global values as YAML.
-  $ tssc template --show-manifests=false
+  $ rhtap-cli template --show-manifests=false
 
   # Rendering only the templates of a single Helm Chart.
-  $ tssc template --show-values=false charts/rhtap-subscriptions
+  $ rhtap-cli template --show-values=false charts/rhtap-subscriptions
 
   # Rendering all resources of a Helm Chart.
-  $ tssc template charts/rhtap-subscriptions
+  $ rhtap-cli template charts/rhtap-subscriptions
 `
 
 // Cmd exposes the cobra instance.

@@ -7,7 +7,7 @@ set -o pipefail
 
 # Login to OpenShift
 export KUBECONFIG=$HOME/rhtap-cli-ci-kubeconfig
-echo "[INFO]Logging into openshift cluster"
+echo "[INFO]Login: $OCP_LOGIN_COMMAND"
 
 $OCP_LOGIN_COMMAND >/dev/null
 echo "[INFO]Console: $(kubectl get routes -n openshift-console console -o jsonpath='{.spec.port.targetPort}://{.spec.host}')"

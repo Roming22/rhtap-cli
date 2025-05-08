@@ -73,7 +73,7 @@ Which is the equivalent of building and running the application, i.e.:
 
 ```bash
 make &&
-    bin/tssc deploy --help
+    bin/rhtap-cli deploy --help
 ```
 
 # GitHub Release
@@ -111,7 +111,7 @@ The release assets are built using `goreleaser`, the configuration for this tool
 To build the release assets for only the current platform, run:
 
 ```bash
-make snapshot ARGS='--single-target --output=bin/tssc'
+make snapshot ARGS='--single-target --output=bin/rhtap-cli'
 ```
 
 To build the release assets for all platforms, run:
