@@ -55,7 +55,7 @@ Examples:
   $ tssc template --show-manifests=false
 
   # Rendering only the templates of a single Helm Chart.
-  $ tssc template --show-values=false tssc/rhtap-subscriptions
+  $ tssc template --show-values=false tssc/tssc-subscriptions
 
   # Rendering all resources of a Helm Chart.
   $ tssc template charts/tssc-subscriptions
