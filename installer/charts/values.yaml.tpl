@@ -53,7 +53,6 @@ openshift:
 {{- if $odfEnabled }}
     - {{ $odfNamespace }}
 {{- end }}
-    - minio-operator
 
 #
 # tssc-subscriptions
@@ -104,42 +103,12 @@ subscriptions:
         - {{ $odfNamespace }}
 
 #
-# tssc-minio-operator
-#
-
-minIOOperator:
-  enabled: {{ $minIOOperatorEnabled }}
-
-
-#
 # tssc-infrastructure
 #
-
-{{- $tpaKafkaSecretName := "tpa-kafka" }}
-{{- $tpaKafkaBootstrapServers := "tpa-kafka-bootstrap:9092" }}
-{{- $tpaMinIORootSecretName := "tpa-minio-root-env" }}
 
 infrastructure:
   developerHub:
     namespace: {{ $rhdh.Namespace }}
-  kafkas:
-    tpa:
-      enabled: {{ $tpa.Enabled }}
-      namespace: {{ $tpa.Namespace }}
-      username: {{ $tpaKafkaSecretName }}
-  minIOTenants:
-    tpa:
-      enabled: {{ $tpa.Enabled }}
-      namespace: {{ $tpa.Namespace }}
-      rootSecretName: {{ $tpaMinIORootSecretName }}
-      kafkaNotify:
-        bootstrapServers: {{ $tpaKafkaBootstrapServers }}
-        username: {{ $tpaKafkaSecretName }}
-        password:
-          valueFrom:
-            secretKeyRef:
-              name: {{ $tpaKafkaSecretName }}
-              key: password
   postgresClusters:
     keycloak:
       enabled: {{ $keycloak.Enabled }}
@@ -163,7 +132,6 @@ infrastructure:
 {{- $keycloakRouteTLSSecretName := "keycloak-tls" }}
 {{- $keycloakRouteHost := printf "sso.%s" $ingressDomain }}
 {{- $argoCDName := printf "%s-gitops" .Installer.Namespace }}
-{{- $quayMinIOHost := printf "minio-%s.%s" $quay.Namespace $ingressDomain }}
 
 backingServices:
   keycloak:
